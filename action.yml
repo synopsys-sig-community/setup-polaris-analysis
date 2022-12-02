@@ -62,7 +62,9 @@ runs:
       shell: bash
     - name: Set other env variables
       run: |
-        echo "polaris_url=${{inputs.polaris_url}}" >> $GITHUB_ENV
-        echo "polaris_token=${{inputs.polaris_token}}" >> $GITHUB_ENV
-        echo "polaris_install_folder=${{inputs.polaris_install_folder}}" >> $GITHUB_ENV
+        echo "POLARIS_SERVER_URL=${{inputs.polaris_url}}" >> $GITHUB_ENV
+        echo "POLARIS_ACCESS_TOKEN=${{inputs.polaris_token}}" >> $GITHUB_ENV
+        echo "POLARIS_HOME=${{inputs.polaris_install_folder}}" >> $GITHUB_ENV
+        : #Enables the incremental analysis capability from Polaris thin-client
+        echo "POLARIS_FF_ENABLE_COVERITY_INCREMENTAL=true" >> $GITHUB_ENV 
       shell: bash
