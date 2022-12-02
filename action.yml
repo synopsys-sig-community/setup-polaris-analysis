@@ -60,6 +60,7 @@ runs:
         cd ${{inputs.polaris_install_folder}}
         wget -q ${{inputs.polaris_url}}/api/tools/v2/downloads/polaris_cli-${{ inputs.polaris_platform }}-${{inputs.polaris_version}}.zip
         unzip -j -o polaris_cli-${{ inputs.polaris_platform }}-${{inputs.polaris_version}}.zip -d ${{inputs.polaris_install_folder}} && rm -rf polaris_cli-${{ inputs.polaris_platform }}-${{inputs.polaris_version}}.zip
+        ls -la
       shell: bash
     # Add Polaris bin -folder into runners PATH
     - run: echo "${{inputs.polaris_install_folder}}/polaris_cli-${{ inputs.polaris_platform }}-${{inputs.polaris_version}}/bin" >> $GITHUB_PATH
