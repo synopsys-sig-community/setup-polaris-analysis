@@ -42,7 +42,7 @@ runs:
         echo "project=$project" >> $GITHUB_ENV
         echo "branch=$branch" >> $GITHUB_ENV
       shell: bash
-    - if: ${{ inputs.cache }}
+    - if: ${{ inputs.cache == 'true'}}
       id: cache-polaris-tools
       uses: actions/cache@v3
       with:
