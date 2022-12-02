@@ -1,0 +1,67 @@
+name: "Polaris tools for SAST analysis"
+description: "Will download the polaris thin clinet and extract it into given folder. Will also add Polaris tools into current runner PATH"
+author: Jouni Lehto
+branding:
+  icon: shield
+  color: blue
+inputs:
+  project:
+    description: Project name in Polaris, if not given then default=github.repository
+    required: false
+    default: ${{github.repository}}
+  branch:
+    description: Project branch name in Polaris, if not given then default=github.ref_name
+    required: false
+    default: ${{github.ref_name}}
+  polaris_url:
+    description: URL for Polaris where the thin client can be downloaded
+    required: true
+  polaris_token:
+    description: Polaris Access Token
+    required: true
+  polaris_install_folder:
+    description: To which folder the tools are extracted. Default is /tmp/cache/polaris
+    required: false
+    default: /tmp/cache/polaris
+  polaris_version:
+    description: "What version of Polaris thin client is needed, example: polaris_cli-linux64-2022.9.0 (Default). Fow Windows polaris_cli-win64-2022.9.0 and for MacOS polaris_cli-macosx-2022.9.0"
+    default: polaris_cli-linux64-2022.9.0
+    required: false
+  cache: 
+    description: Polaris tools can be cached by setting this to true. Default is true.
+    required: false
+    default: true
+
+runs:
+  using: composite
+  steps:
+    # Set project and stream name as environmental params and replace special characters /%& and space to _
+    # Project name can be found like ${{env.project}} and stream like ${{env.branch}}
+    - name: Set Project and branch names into env
+      run: |
+        echo "project=$project" >> $GITHUB_ENV
+        echo "branch=$branch" >> $GITHUB_ENV
+      shell: bash
+    - if: ${{ inputs.cache }}
+      id: cache-polaris-tools
+      uses: actions/cache@v3
+      with:
+        path: ${{inputs.polaris_install_folder}}
+        key: cache-polaris-tools-${{ inputs.polaris_version }} #Cache is for polaris_version
+    # Download the Polaris tool and extract it
+    - if: steps.cache-polaris-tools.outputs.cache-hit != 'true'
+      run: |
+        : #Get Polaris tools from Polaris and extract them
+        mkdir -p ${{inputs.polaris_install_folder}}
+        curl -f -o ${{inputs.polaris_install_folder}}/${{inputs.polaris_version}}.zip ${{inputs.polaris_url}}/api/tools/${{inputs.polaris_version}}.zip
+        cd ${{inputs.polaris_install_folder}} && unzip -j -o ${{inputs.polaris_version}}.zip -d ${{inputs.polaris_install_folder}} && rm -rf ${{inputs.polaris_version}}.zip
+      shell: bash
+    # Add Polaris bin -folder into runners PATH
+    - run: echo "${{inputs.cov_install_folder}}/${{inputs.polaris_version}}/bin" >> $GITHUB_PATH
+      shell: bash
+    - name: Set other env variables
+      run: |
+        echo "polaris_url=${{inputs.polaris_url}}" >> $GITHUB_ENV
+        echo "polaris_token=${{inputs.polaris_token}}" >> $GITHUB_ENV
+        echo "polaris_install_folder=${{inputs.polaris_install_folder}}" >> $GITHUB_ENV
+      shell: bash
