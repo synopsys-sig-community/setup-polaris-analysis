@@ -54,7 +54,7 @@ runs:
         : #Get Polaris tools from Polaris and extract them
         mkdir -p ${{inputs.polaris_install_folder}}
         cd ${{inputs.polaris_install_folder}}
-        wget -q ${{inputs.polaris_url}}/api/tools/v2/${{inputs.polaris_version}}.zip
+        wget -q ${{inputs.polaris_url}}/api/tools/v2/downloads/${{inputs.polaris_version}}.zip
         unzip -j -o ${{inputs.polaris_version}}.zip -d ${{inputs.polaris_install_folder}} && rm -rf ${{inputs.polaris_version}}.zip
       shell: bash
     # Add Polaris bin -folder into runners PATH
