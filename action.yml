@@ -53,8 +53,9 @@ runs:
       run: |
         : #Get Polaris tools from Polaris and extract them
         mkdir -p ${{inputs.polaris_install_folder}}
-        curl -f -o ${{inputs.polaris_install_folder}}/${{inputs.polaris_version}}.zip ${{inputs.polaris_url}}/api/tools/${{inputs.polaris_version}}.zip
-        cd ${{inputs.polaris_install_folder}} && unzip -j -o ${{inputs.polaris_version}}.zip -d ${{inputs.polaris_install_folder}} && rm -rf ${{inputs.polaris_version}}.zip
+        cd ${{inputs.polaris_install_folder}}
+        wget -q ${{inputs.polaris_url}}/api/tools/v2/${{inputs.polaris_version}}.zip
+        unzip -j -o ${{inputs.polaris_version}}.zip -d ${{inputs.polaris_install_folder}} && rm -rf ${{inputs.polaris_version}}.zip
       shell: bash
     # Add Polaris bin -folder into runners PATH
     - run: echo "${{inputs.cov_install_folder}}/${{inputs.polaris_version}}/bin" >> $GITHUB_PATH
