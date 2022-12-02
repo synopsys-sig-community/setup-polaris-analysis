@@ -43,8 +43,8 @@ runs:
     # Project name can be found like ${{env.project}} and stream like ${{env.branch}}
     - name: Set Project and branch names into env
       run: |
-        echo "project=$project" >> $GITHUB_ENV
-        echo "branch=$branch" >> $GITHUB_ENV
+        echo "project=${{inputs.project}}" >> $GITHUB_ENV
+        echo "branch=${{inputs.branch}}" >> $GITHUB_ENV
       shell: bash
     - if: ${{ inputs.cache == 'true'}}
       id: cache-polaris-tools
