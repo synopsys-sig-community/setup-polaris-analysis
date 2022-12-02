@@ -28,8 +28,8 @@ inputs:
     default: "linux64"
     required: false
   polaris_version:
-    description: "What version of Polaris thin client is needed, example: polaris_cli-linux64-2022.9.0 (Default). Fow Windows polaris_cli-win64-2022.9.0 and for MacOS polaris_cli-macosx-2022.9.0"
-    default: "2022.9.0"
+    description: "What version of Polaris thin client is needed, example: 2022.9.0 (Default)"
+    default: 2022.9.0
     required: false
   cache: 
     description: Polaris tools can be cached by setting this to true. Default is true.
