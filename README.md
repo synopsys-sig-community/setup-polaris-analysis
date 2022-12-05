@@ -23,10 +23,10 @@ These key-value pairs are set into environment values and are accessed with **${
 |----------|--------|
 | project | Given project name or ${{github.repository}}. |
 | branch | Given branch name or ${{github.ref_name}}. |
-| POLARIS_SERVER_URL | ${{inputs.polaris_url}}" |
-| POLARIS_ACCESS_TOKEN | ${{inputs.polaris_token}}" |
-| POLARIS_HOME | ${{inputs.polaris_install_folder}}" |
-| POLARIS_VERSION | ${{inputs.polaris_version}}" |
+| POLARIS_SERVER_URL | ${{inputs.polaris_url}} |
+| POLARIS_ACCESS_TOKEN | ${{inputs.polaris_token}} |
+| POLARIS_HOME | ${{inputs.polaris_install_folder}} |
+| POLARIS_VERSION | ${{inputs.polaris_version}} |
 
 ## Usage
 
