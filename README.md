@@ -7,8 +7,6 @@ This action expects that given Polaris tool version is available via /api/tools/
 ## Available Options
 | Option name | Description | Default value | Required |
 |-------------|-------------|---------------|----------|
-| project     | Project name in Polaris, if not given then default=github.repository | ${{github.repository}} | false |
-| branch      | Project branch name in Polaris, if not given then default=github.ref_name | ${{github.ref_name}} | false |
 | polaris_url | URL for Polaris where the thin client can be downloaded | - | true |
 | polaris_token | Polaris Access Token | - | true |
 | polaris_install_folder | To which folder the tools are extracted. Default is /tmp/cache/polaris | /tmp/cache/polaris | false |
@@ -21,8 +19,6 @@ This action expects that given Polaris tool version is available via /api/tools/
 These key-value pairs are set into environment values and are accessed with **${{env.key}}**
 | Key | Value |
 |----------|--------|
-| project | Given project name or ${{github.repository}}. |
-| branch | Given branch name or ${{github.ref_name}}. |
 | POLARIS_SERVER_URL | ${{inputs.polaris_url}} |
 | POLARIS_ACCESS_TOKEN | ${{inputs.polaris_token}} |
 | POLARIS_HOME | ${{inputs.polaris_install_folder}} |
@@ -104,8 +100,6 @@ In this example is given all available inputs.
       with:
         polaris_url: ${{secrets.POLARIS_SERVER_URL}} #Polaris server URL
         polaris_token: ${{secrets.POLARIS_ACCESS_TOKEN}} #Polaris Access Token
-        project: TestPolarisProject
-        branch: main
         polaris_install_folder: /tmp/cache/polaris
         polaris_platform: linux64
         polaris_version: 2022.9.0

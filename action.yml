@@ -5,14 +5,6 @@ branding:
   icon: shield
   color: blue
 inputs:
-  project:
-    description: Project name in Polaris, if not given then default=github.repository
-    required: false
-    default: ${{github.repository}}
-  branch:
-    description: Project branch name in Polaris, if not given then default=github.ref_name
-    required: false
-    default: ${{github.ref_name}}
   polaris_url:
     description: URL for Polaris where the thin client can be downloaded
     required: true
@@ -39,13 +31,6 @@ inputs:
 runs:
   using: composite
   steps:
-    # Set project and stream name as environmental params and replace special characters /%& and space to _
-    # Project name can be found like ${{env.project}} and stream like ${{env.branch}}
-    - name: Set Project and branch names into env
-      run: |
-        echo "project=${{inputs.project}}" >> $GITHUB_ENV
-        echo "branch=${{inputs.branch}}" >> $GITHUB_ENV
-      shell: bash
     - if: ${{ inputs.cache == 'true'}}
       id: cache-polaris-tools
       uses: actions/cache@v3
