@@ -29,7 +29,7 @@ These key-value pairs are set into environment values and are accessed with **${
 **Example full pipeline:**
 
 In this full pipeline example we first set up the Polaris tools into runner PATH with setup-polaris-analysis action and
-then we are using other action called [lejouni/polaris-analysis](https://github.com/lejouni/polaris-analysis) to run the actual polaris analysis.
+then we are using other action called [synopsys-sig-community/polaris-analysis](https://github.com/synopsys-sig-community/polaris-analysis) to run the actual polaris analysis.
 ```yaml
 name: Java CI with Maven and Polaris
 
