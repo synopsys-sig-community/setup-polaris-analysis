@@ -53,13 +53,13 @@ jobs:
         cache: 'maven'
 
     - name: Set up Polaris # This will add Polaris tools into runner PATH
-      uses: lejouni/setup-polaris-analysis@main
+      uses: synopsys-sig-community/polaris-analysis@main
       with:
         polaris_url: ${{secrets.POLARIS_SERVER_URL}} #Polaris server URL
         polaris_token: ${{secrets.POLARIS_ACCESS_TOKEN}} #Polaris Access Token
     
     - name: Analyze with Polaris
-      uses: lejouni/polaris-analysis@main
+      uses: synopsys-sig-community/polaris-analysis@main
       with:
         polaris_config_file: polaris.yml
         build_command: mvn package
@@ -85,7 +85,7 @@ jobs:
 In this example is given only the required inputs.
 ```yaml
     - name: Set up Polaris # This will add Polaris tools into runner PATH
-      uses: lejouni/setup-polaris-analysis@main
+      uses: synopsys-sig-community/setup-polaris-analysis@main
       with:
         polaris_url: ${{secrets.POLARIS_SERVER_URL}} #Polaris server URL
         polaris_token: ${{secrets.POLARIS_ACCESS_TOKEN}} #Polaris Access Token
@@ -96,7 +96,7 @@ In this example is given only the required inputs.
 In this example is given all available inputs.
 ```yaml
     - name: Set up Polaris # This will add Polaris tools into runner PATH
-      uses: lejouni/setup-polaris-analysis@main
+      uses: synopsys-sig-community/setup-polaris-analysis@main
       with:
         polaris_url: ${{secrets.POLARIS_SERVER_URL}} #Polaris server URL
         polaris_token: ${{secrets.POLARIS_ACCESS_TOKEN}} #Polaris Access Token
